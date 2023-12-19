@@ -11,6 +11,8 @@ jobs:
   build:
     if: ${{ !startsWith(github.event.head_commit.message, 'chore:') }}
     runs-on: ubuntu-latest
+    environment: 
+      name: workspace
     steps:
       - uses: actions/checkout@v4
 
