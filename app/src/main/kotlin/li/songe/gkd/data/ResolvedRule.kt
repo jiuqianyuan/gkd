@@ -107,8 +107,8 @@ sealed class ResolvedRule(
                 }
             }
             val t = System.currentTimeMillis()
-            LogUtils.d("t": t)
-            LogUtils.d("actionTriggerTime.value": actionTriggerTime.value)
+            LogUtils.d("t:",t)
+            LogUtils.d("actionTriggerTime.value:",actionTriggerTime.value)
             if (matchDelay > 0 && t - matchChangedTime < matchDelay) {
                 return 4 // 处于匹配延迟中
             }
