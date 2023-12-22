@@ -6,6 +6,9 @@ import li.songe.gkd.service.TopActivity
 import li.songe.gkd.service.lastTriggerAppRule
 import li.songe.gkd.service.querySelector
 import li.songe.selector.Selector
+import com.blankj.utilcode.util.LogUtils
+import com.blankj.utilcode.util.ScreenUtils
+import com.blankj.utilcode.util.ToastUtils
 
 sealed class ResolvedRule(
     val matches: List<Selector>,
