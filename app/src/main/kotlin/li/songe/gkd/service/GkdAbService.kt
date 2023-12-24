@@ -110,33 +110,24 @@ class GkdAbService : CompositionAbService({
                         newQueryTask()
                     }
                 }
-                if (statusCode != 0) {
-                    LogUtils.d("statusCode",statusCode)
-                    continue
-                }
-                val nodeVal = safeActiveWindow
-                if(safeActiveWindow) {
-                    LogUtils.d("statusCode",statusCode)
-                    continue
-                }
-                val target = rule.query(nodeVal)
-                if(target) {
-                    LogUtils.d("statusCode",statusCode)
-                    continue
-                }
-                if (activityRule !== getCurrentRules()){
-                    LogUtils.d("activityRule !== getCurrentRules()")
-                    break
-                }
+                LogUtils.d("statusCode != 0")
+                if (statusCode != 0) continue
+                LogUtils.d("val nodeVal")
+                val nodeVal = safeActiveWindow ?: continue
+                LogUtils.d("val target")
+                val target = rule.query(nodeVal) ?: continue
+                LogUtils.d("activityRule !== getCurrentRules()")
+                if (activityRule !== getCurrentRules()) break
+                LogUtils.d("rule.checkDelay() && rule.actionDelayJob == null")
                 if (rule.checkDelay() && rule.actionDelayJob == null) {
                     rule.actionDelayJob = scope.launch {
                         delay(rule.actionDelay)
                         rule.actionDelayJob = null
                         newQueryTask()
                     }
-                     LogUtils.d("rule.checkDelay() && rule.actionDelayJob == null")
                     continue
                 }
+                LogUtils.d("val actionResult")
                 val actionResult = rule.performAction(context, target)
                 if (actionResult.result) {
                     LogUtils.d(
